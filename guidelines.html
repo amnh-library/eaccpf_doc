@@ -1,0 +1,779 @@
+<!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type=""></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+function myFunction() {
+    var x = document.getElementById("nested");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+$(document).ready(function () {
+$('[data-toggle="popover"]').popover();
+});
+ $(document).ready(function(){
+        // Add minus icon for collapse element which is open by default
+        $(".collapse.in").each(function(){
+        	$(this).siblings(".panel-heading").find(".glyphicon").addClass("glyphicon-minus").removeClass("glyphicon-plus");
+        });
+                
+        // Toggle plus minus icon on show hide of collapse element
+        $(".collapse").on('show.bs.collapse', function(){
+        	$(this).parent().find(".glyphicon").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+        }).on('hide.bs.collapse', function(){
+        	$(this).parent().find(".glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+        });
+    });
+
+</script>
+<style type="text/css">
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+pre{
+  font-family: monospace;
+  margin-bottom: 10px;
+  overflow: auto;
+  width: auto;
+  padding: 5px;
+  background-color: #eee;
+  width: 650px!ie7;
+  padding-bottom: 20px!ie7;
+  max-height: 600px;
+}
+.logo {
+    margin-top: 20px;
+    height: 32px;
+    margin-left: -2%;
+    margin-bottom: 20px; 
+    }
+h2 {
+    padding-bottom: 20px;
+    }
+
+</style>
+        
+        <title>AMNH Library eac-cpf metadata guidelines</title>
+        
+    </head>
+    <body>
+        <div class="container">
+            <img class="logo" src="AMNHleft2L_K.jpg" alt="American Museum of Natural History"/>
+            <div class="container">
+            <h2>Research Library metadata guidelines for Encoded Archival Description -- Corporate Bodies, Persons and Families</h2>
+            <p>This is a reference for marking up entity description data using eac-cpf xml (attributes are not covered, but can be viewed in examples). Shown below are the four main sections in the schema. Expand the sections to view the nested elements. Many of the elements have a short description. Click to view them. <strong>[R] = repeatable.</strong></p>
+                <p>Multiple entities are not covered in this document. For more information about the schema, visit the <a href="https://eac.staatsbibliothek-berlin.de/schema/taglibrary/cpfTagLibrary2018_EN.html" target="_blank">EAC-CPF tag library</a>. To see encoded data, jump to <a href="#examples">examples</a></p>
+            
+        </div>
+            
+            <!-- control -->
+        
+            <div class="container">
+                <h3>eac-cpf/<strong>control</strong></h3>
+                <p>Contains information about the entity record itself, such as identifier, authoring body, sources, etc. <br/>Note: top elements must be used in the order they appear in the list below. <a href="#exampleControl">Jump to an encoded example.</a></p>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="accordion glyphicon glyphicon-plus"></span>  control</a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Required" data-content="Unique identifier of entity.">recordId</a></li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Alternative identifiers associated with same entity. Use for deprecated amnh identifiers">otherRecordId [R]</a></li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Required" data-content="Current status of eac-cpf record. Choose from following values: 'cancelled', 'deleted', 'deletedReplaced', 'deletedSplit', 'derived', 'new', 'revised'">maintenanceStatus</a></li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Current publication status of eac-cpf record. Choose from following terms: 'inProcess', 'approved'">publicationStatus</a></li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Required" data-content="Institution responsible for creating and maintaining eac-cpf record (wrapper). <agencyName> is mandatory.">maintenanceAgency</a><ul class="text-muted">
+                                        <li>agencyCode</li>
+                                        <li>otherAgencyCode [R]</li>
+                                <li>agencyName</li>
+                                <li>descriptiveNote</li></ul>
+                               </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Main language used to create the eac-cpf record (wrapper). Use attributes @languageCode and @script in nested tags.">languageDeclaration [R]</a><ul class="text-muted">
+                                        <li>language</li>
+                                        <li>script</li>
+                                        <li>descriptiveNote</li></ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Declare rules, standards and controlled vocabularies used to create description (wrapper). The convention may be referenced by its abbreviation within other elements. <citation> is mandatory.">conventionDeclaration [R]</a><ul class="text-muted">
+                                        <li>abbreviation</li>
+                                        <li>citation [R]</li>
+                                        <li>descriptiveNote</li></ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Declare local rules, standards and controlled vocabularies used to create description (wrapper). The convention may be referenced using @vocabularySource within other elements. <citation> is mandatory, if used.">localTypeDeclaration [R]</a><ul class="text-muted">
+                                        <li>abbreviation</li>
+                                        <li>citation [R]</li>
+                                        <li>descriptiveNote</li></ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Control information used to define local practice (wrapper).">localControl [R]</a><ul class="text-muted">
+                                        <li>term</li>
+                                        <li>date</li>
+                                        <li>dateRange</li></ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Required" data-content="Use to record creation and history of eac-cpf record (wrapper). <maintenanceEvent> is a mandatory wrapper element containing event and agent data.">maintenanceHistory</a><ul class="text-muted">
+                                        <li>maintenanceEvent [R]</li>
+                                        <ul>
+                                            <li><a data-toggle="popover" title="Required" data-content="Choose from the following values: 'cancelled', 'created', 'deleted', 'derived', 'revised', 'updated'.">eventType</a></li>
+                                            <li><a data-toggle="popover" title="Required" data-content="Use YYYY-MM-DD. @standardDateTime locally required.">eventDateTime</a></li>
+                                            <li><a data-toggle="popover" title="Optional" data-content="Choose from the following values: 'human' or 'machine'.">agentType</a></li>
+                                            <li><a data-toggle="popover" title="Optional" data-content="Name of person or script editing the record.">agent</a></li>
+                                            <li><a data-toggle="popover" title="Locally required" data-content="Brief description of changes to the eac-cpf record.">eventDescription</a></li>
+                                        </ul>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Resources used to create the description (wrapper). <source> is a mandatory wrapper element containing <sourceEntry>. Links to persistent digital files may be cited with a URI.">sources</a><ul class="text-muted">
+                                        <li><a data-toggle="popover" title="Required" data-content="Contains information of a single source (wrapper). Use @xlink:href to include URI. <sourceEntry> contains the citation. Use <descriptiveNote> for additional information about the resource.">source</a></li>
+                                        <ul>
+                                        <li><a data-toggle="popover" title="Required" data-content="Format citation using local rules.">sourceEntry</a></li>
+                                        <li>objectBinWrap</li>
+                                        <li>objectXMLWrap</li>
+                                        <li>descriptiveNote</li></ul>
+                                    </ul>
+                                </li>
+                            </ul>
+                        <!-- footer -->
+                            <div class="panel-footer">
+                            <h4 class="panel-title">Further encoding for <b>descriptiveNote</b></h4>
+                            <ul>
+                                <li>
+                                    <a data-toggle="popover" title="Optional" data-content="Can be used to expand description for certain elements.">descriptiveNote</a></li>
+                                <ul><li>
+                                    <a data-toggle="popover" title="Required, if used" data-content="Wrap textual notes in paragraph tags.">p [R]</a></li>
+                                </ul>
+                        </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!-- identity -->
+        
+            <div class="container">
+                <h3>eac-cpf/cpfDescription/<strong>identity</strong></h3>
+                <p>Use to mark up authorized and variant forms of name. Elements are listed in alphabetical order and are not required to be encoded in a specific order. However, nested elements must be contained in their designated wrapper elements. <a href="#exampleIdentity">Jump to an encoded example.</a></p>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2"><span class="glyphicon glyphicon-plus"></span>  identity</a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">descriptiveNote</li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="To record other identifiers associated with the entity. Not to be confused with <recordId>">entityId [R]</a></li>
+                                <li class="list-group-item"><a data-toggle="popover" title="Required" data-content="Choose from the following values: 'person', 'corporateBody', 'family'.">entityType</a></li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Required" data-content="Record names as they appear in controlled thesauri or other trusted sources (wrapper). <part> may be repeated to further encode sections of the name, such as surname or date.">nameEntry [R]</a>
+                                <ul class="text-muted">
+                                    <li>
+                                        <a data-toggle="popover" title="Required" data-content="Enter the full name or use multiple <part> tags to separate different sections of a name.">part [R]</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Record the dates the name form was in use, if known. Not to be confused with dates that distinguish one named entity from another, such as birth year, death year, year(s) active, etc.">useDates</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="AMNH local rule: use to identify uncontrolled names established unofficially using published sources. Value: 'local'. Terms must be declared in the <control> section of the eac-cpf record.">alternativeForm</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use to identify the authorized source of the name. Values must be declared in the <control> section of the eac-cpf record.">authorizedForm</a></li>
+                                </li></ul>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use for parallel forms of the name, such as a name in a different language, transliterated, etc. (wrapper). When multiple <nameEntry> elements are nested here, <preferredForm> may be used to pair the parallel name with an authorized name form.">nameEntryParallel [R]</a>
+                                <ul class="text-muted">
+                                    <li>
+                                        <a data-toggle="popover" title="Required" data-content="Record names as they appear in controlled thesauri or other trusted sources (wrapper). <part> may be repeated to parse out sections of the name, such as surname or date.">nameEntry [R]</a></li>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Required" data-content="Enter the full name or use multiple <part> tags to separate different sections of a name.">part [R]</a></li>
+                                        <li>preferredForm [R]</li>
+                                    </ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Record the dates the name form was in use, if known. Not to be confused with dates that distinguish one named entity from another, such as birth year, death year, year(s) active, etc.">useDates</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="AMNH local rule: use to identify uncontrolled names established unofficially using published sources. Value: 'local'. Terms must be declared in the <control> section of the eac-cpf record.">alternativeForm</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use to identify the authorized source of the name. Values must be declared in the <control> section of the eac-cpf record.">authorizedForm</a></li>
+                                </li></ul>
+                            </ul>
+                            
+                            <!-- footer -->
+                            
+                            <div class="panel-footer">
+                                <h4 class="panel-title">Further encoding for <b>useDates</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Contains a single date expressed to the day or year. Example: 'January 1, 1919', 'January 1919' or '1919'.">date</a></li>
+                                    <li>
+                                    <a data-toggle="popover" title="Optional" data-content="Use for expressing inclusive dates (wrapper)">dateRange</a></li>
+                                <ul class="text-muted">
+                                    <li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="Start date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">fromDate</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="End date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">toDate</a>
+                                    </li>
+                                </ul>
+                                <li>
+                                    <a data-toggle="popover" title="Optional" data-content="Use for expressing sets of dates (wrapper). May contain <date> and/or  <dateRange>">dateSet</a></li>
+                                <ul class="text-muted">
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Single dates may be repeated within <dateSet>">date [R]</a></li>
+                                </ul>
+                                    <ul>
+                                    <li class="text-muted">
+                                        <a data-toggle="popover" title="Optional" data-content="Ranges of inclusive dates may be repeated within <dateSet>">dateRange [R]</a></li>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="Start date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">fromDate</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="End date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">toDate</a></li>
+                                    </ul>
+                                    </ul>
+                                    </ul>
+                                <h4 class="panel-title">Further encoding for <b>descriptiveNote</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Can be used to expand description for certain elements.">descriptiveNote</a></li>
+                                    <ul><li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="Wrap textual notes in paragraph tags.">p [R]</a></li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!-- description -->
+            
+            <div class="container">
+                <h3>eac-cpf/cpfDescription/<strong>description</strong></h3>
+                <p>Contextual information about the entity. Includes biographical and historical notes, chronologies, place names, occupations, functions and other structured data can be provided here. None of the elements under &lt;description&gt; are required by the eac-cpf standard. Elements are listed in alphabetical order and are not required to be encoded in a specific order. However, nested elements must be contained in their designated wrapper elements. <a href="#exampleDescription">Jump to an encoded example.</a></p>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3"><span class="glyphicon glyphicon-plus"></span>  description</a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use to provide textual description about an entity.">bioghist</a>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Optional" data-content="Brief textual description of entity.">abstract</a></li>
+                                        <li><a data-toggle="popover" title="Optional" data-content="Use for structuring a list of significant events in sequence. A date and event are required within <chronItem>. A place can also be identified with an event, but is not required.">chronList</a>
+                                            <ul>
+                                                <li>chronItem [R]</li>
+                                                <ul>
+                                                    <li><a data-toggle="popover" title="Required, if used" data-content="Pair date with an event.">date | dateRange</a></li>
+                                                    <li><a data-toggle="popover" title="Required, if used" data-content="Use to state an event paired with a date. Repeat <chronItem> to add more events.">event</a></li>
+                                                    <li>placeEntry</li>
+                                                </ul>
+                                            </ul>
+                                            <li>citation</li>
+                                            <li>list</li>
+                                            <li>outline</li>
+                                            <li>p [R]</li>
+                                    </ul>
+                                </li>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use for start and end dates for an entity. For example, a person record may contain year of birth and year of death in existDates; a corporate entity may contain a date of establishment and dissolution.">existDates</a>
+                                    <ul class="text-muted">
+                                        <li>date | dateRange</li>
+                                        <li>descriptiveNote</li>
+                                            </ul>
+                                            
+                        </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use for describing general social and cultural context of the entity (wrapper).">generalContext</a>
+                                    <ul class="text-muted">
+                                        <li>citation</li>
+                                        <li>list</li>
+                                        <li>outline</li>
+                                        <li>p [R]</li>
+                                    </ul>
+                                    
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Categories that can be used to describe an entity">localDescription | legalStatus | function | occupation | mandate</a>
+                                    <ul class="text-muted">
+                                        <li>citation</li>
+                                        <li>date | dateRange | dateSet</li>
+                                        <li>descriptiveNote</li>
+                                        <li>placeEntry</li>
+                                        <li>term</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="A grouping element to bundle individual categories respectively.">localDescriptions | legalStatuses | functions | occupations | mandates</a>
+                                    <ul class="text-muted">
+                                        <li>citation</li>
+                                        <li>descriptiveNote</li>
+                                        <li>localDescription [R] | legalStatus [R] | function [R] | occupation [R] | mandate [R]</li>
+                                        <li>list</li>
+                                        <li>outline</li>
+                                        <li>p [R]</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Geographic location of significance to entity (wrapper). A single <place> may stand alone or individual places can be grouped in <places>">place [R]</a>
+                                    <ul class="text-muted">
+                                        <li>address</li>
+                                        <ul>
+                                            <li>addressLine</li>
+                                        </ul>
+                                        <li>citation</li>
+                                        <li>date | dateRange | dateSet</li>
+                                        <li>descriptiveNote</li>
+                                        <li><a data-toggle="popover" title="Required, if used" data-content="Name of place; use of controlled vocabulary highly recommended. Use @vocabularySource to cite a URI.">placeEntry</a></li>
+                                        <li><a data-toggle="popover" title="Optional" data-content="Provides contextual role to a place; use of locally controlled terms or community standards is strongly recommended.">placeRole</a></li>
+                                    </ul>
+                                    
+                                    <li class="list-group-item">
+                                        <a data-toggle="popover" title="Optional" data-content="A grouping element to bundle individual <place> elements. Use when it is necessary to manipulate the places as a group.">places [R]</a>
+                                        <ul class="text-muted">
+                                            <li>citation</li>
+                                            <li>descriptiveNote</li>
+                                            <li>list</li>
+                                            <li>outline</li>
+                                            <li>p [R]</li>
+                                            <li>place [R]</li>
+                                        </ul>
+                                </li>
+                                    <li class="list-group-item">
+                                        <a data-toggle="popover" title="Optional" data-content="Use to describe internal/administrative structure of a corporate entity or a genealogy of a family (wrapper).">structureOrGenealogy</a>
+                                        <ul class="text-muted">
+                                            <li>citation</li>
+                                            <li>list</li>
+                                            <li>outline</li>
+                                            <li>p [R]</li>
+                                        </ul>
+                                        
+                                    </li>
+                           
+                            <!-- footer -->
+                            
+                            <div class="panel-footer">
+                                <h4 class="panel-title">Further encoding for <b>date | dateRange | dateSet</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Contains a single date expressed to the day or year. Example: 'January 1, 1919', 'January 1919' or '1919'.">date</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use for expressing inclusive dates (wrapper)">dateRange</a></li>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="Start date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">fromDate</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="End date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">toDate</a>
+                                        </li>
+                                    </ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use for expressing sets of dates (wrapper). May contain <date> and/or  <dateRange>">dateSet</a></li>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Optional" data-content="Single dates may be repeated within <dateSet>">date [R]</a></li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text-muted">
+                                            <a data-toggle="popover" title="Optional" data-content="Ranges of inclusive dates may be repeated within <dateSet>">dateRange [R]</a></li>
+                                        <ul class="text-muted">
+                                            <li>
+                                                <a data-toggle="popover" title="Required, if used" data-content="Start date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">fromDate</a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="popover" title="Required, if used" data-content="End date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">toDate</a></li>
+                                        </ul>
+                                    </ul>
+                                </ul><br/>
+                                <h4 class="panel-title">Further encoding for <b>descriptiveNote</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Can be used to expand description for certain elements.">descriptiveNote</a></li>
+                                    <ul><li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="Wrap textual notes in paragraph tags.">p [R]</a></li>
+                                    </ul>
+                                </ul><br/>
+                                <h4 class="panel-title">Further encoding for <b>list</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="General list, not to be confused with chronList.">list [R]</a></li>
+                                    <ul><li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="Wrap textual notes in item tags.">item [R]</a></li>
+                                    </ul>
+                                </ul><br/>
+                                <h4 class="panel-title">Further encoding for <b>outline</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use to encode hierarchical information in an outline format.">outline</a></li>
+                                    <ul><li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="Used to wrap items in a successive order. Levels can be nested to create layers of content.">level [R]</a></li>
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="Use for the content of an outline.">item [R]</a>
+                                        <ul class="text-muted">
+                                            <li>level [R]</li>
+                                            <li>item [R]</li>
+                                            <ul class="text-muted">
+                                                <li>etc.</li>
+                                            </ul>
+                                        </ul></li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!-- relations -->
+        
+            <div class="container">
+                <h3>eac-cpf/cpfDescription/<strong>relations</strong></h3>
+                <p>A CPF entity can act as a node in a set of relations. There are three types of relations that can be documented with an entity: 1) related CPF entities, 2) related functions, and 3) related resources. To learn more about the element's design prinicpals, see the <a href="https://eac.staatsbibliothek-berlin.de/schema/taglibrary/cpfTagLibrary2018_EN.html#d1e685">EAC-CPF tag library.</a> <a href="#exampleRelations">Jump to an encoded example.</a></p>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse4"><span class="glyphicon glyphicon-plus"></span>  relations</a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use for documenting names of persons, corporate bodies or families related to the entity (wrapper). Use @xlink:href to cite a URI for the entity. Use @xlink:arcrole to further define the nature of the relationship (use of controlled terms is highly recommended). Use @cpfRelationType to identify the type of relation from this set of terms: 'identity', 'hierarchical', 'hierarchical-parent', 'hierarchical-child', 'temporal', 'temporal-earlier', 'temporal-later', 'family', or associative'. Other attributes can be used. Please see the EAC-CPF tag library for further guidance.">cpfRelation [R]</a>
+                                <ul>
+                                    <li>date | dateRange | dateSet</li>
+                                    <li>descriptiveNote</li>
+                                    <li>objectBinWrap</li>
+                                    <li>objectXMLWrap</li>
+                                    <li>placeEntry</li>
+                                    <li>relationEntry</li>
+                                </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use for describing a function in relation to the entity (wrapper). Use @xlink:href to cite a URI for the resource. Use @xlink:arcrole to further define the nature of the relationship (use of controlled terms is highly recommended). Use @functionRelationType to identify the type of relation from this set of terms: 'control', 'owns', or 'performs'. Other attributes can be used. Please see the EAC-CPF tag library for further guidance.">functionRelation [R]</a>
+                                    <ul>
+                                        <li>date | dateRange | dateSet</li>
+                                        <li>descriptiveNote</li>
+                                        <li>objectBinWrap</li>
+                                        <li>objectXMLWrap</li>
+                                        <li>placeEntry</li>
+                                        <li>relationEntry</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="popover" title="Optional" data-content="Use to provide information about archival resources related to the entity (wrapper). Use @xlink:href to cite a URI for the entity. Use @resourceRelationType to identify the type of relation from this set of terms: 'creatorOf', 'subjectOf', or 'other'. Other attributes can be used. Please see the EAC-CPF tag library for further guidance.">resourceRelation [R]</a>
+                                    <ul>
+                                        <li>date | dateRange | dateSet</li>
+                                        <li>descriptiveNote</li>
+                                        <li>objectBinWrap</li>
+                                        <li>objectXMLWrap</li>
+                                        <li>placeEntry</li>
+                                        <li>relationEntry</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- footer relations -->
+                            <div class="panel-footer">
+                                <h4 class="panel-title">Further encoding for <b>date | dateRange | dateSet</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Contains a single date expressed to the day or year. Example: 'January 1, 1919', 'January 1919' or '1919'.">date</a></li>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use for expressing inclusive dates (wrapper)">dateRange</a></li>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="Start date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">fromDate</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="popover" title="Required, if used" data-content="End date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">toDate</a>
+                                        </li>
+                                    </ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Use for expressing sets of dates (wrapper). May contain <date> and/or  <dateRange>">dateSet</a></li>
+                                    <ul class="text-muted">
+                                        <li>
+                                            <a data-toggle="popover" title="Optional" data-content="Single dates may be repeated within <dateSet>">date [R]</a></li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text-muted">
+                                            <a data-toggle="popover" title="Optional" data-content="Ranges of inclusive dates may be repeated within <dateSet>">dateRange [R]</a></li>
+                                        <ul class="text-muted">
+                                            <li>
+                                                <a data-toggle="popover" title="Required, if used" data-content="Start date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">fromDate</a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="popover" title="Required, if used" data-content="End date. Can contain natural language date expression. Example: 'January 1, 1919' or circa 1980">toDate</a></li>
+                                        </ul>
+                                    </ul>
+                                </ul>
+                                <h4 class="panel-title">Further encoding for <b>descriptiveNote</b></h4>
+                                <ul>
+                                    <li>
+                                        <a data-toggle="popover" title="Optional" data-content="Can be used to expand description for certain elements.">descriptiveNote</a></li>
+                                    <ul><li>
+                                        <a data-toggle="popover" title="Required, if used" data-content="Wrap textual notes in paragraph tags.">p [R]</a></li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+        
+        <!-- code examples -->
+        
+        <div class="container">
+            <h3 id="examples">Examples</h3>
+        </div>
+            <div class="container">
+                <h4 padding="20px" id="exampleControl">control</h4>
+                <div>
+                    <blockquote>
+                        <pre>
+    <code>
+&lt;control&gt;
+    &lt;recordId&gt;amnhc_0000001&lt;/recordId&gt;
+    &lt;maintenanceStatus&gt;revised&lt;/maintenanceStatus&gt;
+    &lt;publicationStatus&gt;approved&lt;/publicationStatus&gt;
+    &lt;maintenanceAgency&gt;
+        &lt;agencyCode&gt;NNMNH&lt;/agencyCode&gt;
+        &lt;agencyName&gt;American Museum of Natural History&lt;/agencyName&gt;
+    &lt;/maintenanceAgency&gt;
+    &lt;languageDeclaration&gt;
+        &lt;language languageCode="eng"&gt;English&lt;/language&gt;
+        &lt;script scriptCode="Latn"&gt;Latin&lt;/script&gt;
+    &lt;/languageDeclaration&gt;
+    &lt;conventionDeclaration&gt;
+        &lt;abbreviation&gt;lcnaf&lt;/abbreviation&gt;
+        &lt;citation&gt;Library of Congress Name Authority File&lt;/citation&gt;
+    &lt;/conventionDeclaration&gt;
+    &lt;conventionDeclaration&gt;
+        &lt;abbreviation&gt;amnhopac&lt;/abbreviation&gt;
+        &lt;citation&gt;American Museum of Natural History Online Public Access Catalog&lt;/citation&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;Controlled names derived from the AMNH Library catalog.&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/conventionDeclaration&gt;
+    &lt;conventionDeclaration&gt;
+        &lt;abbreviation&gt;local&lt;/abbreviation&gt;
+        &lt;citation&gt;Uncontrolled Form&lt;/citation&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;For use with uncontrolled names found in AMNH documentation.&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/conventionDeclaration&gt;
+    &lt;maintenanceHistory&gt;
+        &lt;maintenanceEvent&gt;
+            &lt;eventType&gt;created&lt;/eventType&gt;
+            &lt;eventDateTime standardDateTime="2018-10-04T14:07:38.278-04:00"&gt;2018 October 4&lt;/eventDateTime&gt;
+            &lt;agentType&gt;human&lt;/agentType&gt;
+            &lt;agent&gt;Iris Lee&lt;/agent&gt;
+        &lt;/maintenanceEvent&gt;
+    &lt;/maintenanceHistory&gt;
+    &lt;sources&gt;
+        &lt;source xlink:href="http://id.loc.gov/authorities/names/n79006850.html"&gt;
+            &lt;sourceEntry&gt;Library of Congress Name Authority File: n79006850&lt;/sourceEntry&gt;
+        &lt;/source&gt;
+        &lt;source xlink:href="http://www.amnh.org/about-the-museum"&gt;
+            &lt;sourceEntry&gt;"About Us." American Museum of Natural History website, accessed 2016 February 23.&lt;/sourceEntry&gt;
+        &lt;/source&gt;
+    &lt;/sources&gt;
+&lt;/control&gt;
+    </code>
+  </pre>
+                    </blockquote>
+            </div>
+            </div>
+            <!-- code example identity -->
+            <div class="container">
+                <h4 padding="20px" id="exampleIdentity">identity</h4>
+                <div>
+                    <blockquote>
+                        <pre>
+    <code>
+&lt;identity&gt;
+    &lt;entityType&gt;corporateBody&lt;/entityType&gt;
+    &lt;nameEntry scriptCode="Latn"&gt;
+        &lt;part localType="corporateName"&gt;American Museum of Natural History&lt;/part&gt;
+        &lt;part localType="subdivisionName"&gt;Akeley Hall of African Mammals&lt;/part&gt;
+        &lt;authorizedForm&gt;amnhopac&lt;/authorizedForm&gt;
+    &lt;/nameEntry&gt;
+    &lt;nameEntry scriptCode="Latn"&gt;
+        &lt;part localType="corporateName"&gt;American Museum of Natural History&lt;/part&gt;
+        &lt;part localType="subdivisionName"&gt;Akeley Memorial Hall of African Mammals&lt;/part&gt;
+        &lt;authorizedForm&gt;amnhopac&lt;/authorizedForm&gt;
+    &lt;/nameEntry&gt;
+    &lt;nameEntry scriptCode="Latn"&gt;
+        &lt;part&gt;Akeley African Mammal Hall&lt;/part&gt;
+        &lt;useDates&gt;
+            &lt;date standardDate="1930"&gt;1930&lt;/date&gt;
+        &lt;/useDates&gt;
+        &lt;alternativeForm&gt;local&lt;/alternativeForm&gt;
+    &lt;/nameEntry&gt;
+    &lt;nameEntry scriptCode="Latn"&gt;
+        &lt;part&gt;Roosevelt African Hall&lt;/part&gt;
+        &lt;useDates&gt;
+            &lt;date standardDate="1920"&gt;1920&lt;/date&gt;
+        &lt;/useDates&gt;
+        &lt;alternativeForm&gt;local&lt;/alternativeForm&gt;
+    &lt;/nameEntry&gt;
+&lt;/identity&gt;
+    </code>
+  </pre>
+                    </blockquote>
+                </div>
+            </div>
+            <!-- code example description -->
+            <div class="container">
+                <h4 padding="20px" id="exampleDescription">description</h4>
+                <div>
+                    <blockquote>
+                        <pre>
+    <code>
+&lt;description&gt;
+    &lt;existDates&gt;
+        &lt;dateRange&gt;
+            &lt;fromDate standardDate="1921"&gt;1921&lt;/fromDate&gt;
+            &lt;toDate standardDate="1930"&gt;1930&lt;/toDate&gt;
+        &lt;/dateRange&gt;
+    &lt;/existDates&gt;
+    &lt;places&gt;
+        &lt;places&gt;
+            &lt;placeRole&gt;Expedition Site&lt;/placeRole&gt;
+            &lt;placeEntry vocabularySource="http://vocab.getty.edu/tgn/7001796"&gt;Fujian&lt;/placeEntry&gt;
+            &lt;descriptiveNote&gt;
+                &lt;p&gt;Fukien province; Pope collected in this region.&lt;/p&gt;
+            &lt;/descriptiveNote&gt;
+        &lt;/place&gt;
+        &lt;places&gt;
+            &lt;placeRole&gt;Expedition Site&lt;/placeRole&gt;
+            &lt;placeEntry vocabularySource="http://vocab.getty.edu/tgn/7001758"&gt;Beijing&lt;/placeEntry&gt;
+            &lt;descriptiveNote&gt;
+                &lt;p&gt;Peking, where the expedition headquarters were located.&lt;/p&gt;
+            &lt;/descriptiveNote&gt;
+        &lt;/place&gt;
+        ...
+    &lt;/places&gt;
+    &lt;localDescription localType="amnhClass"&gt;
+        &lt;term&gt;expedition&lt;/term&gt;
+    &lt;/localDescription&gt;
+    &lt;localDescription localType="descriptionStatus"&gt;
+        &lt;term&gt;enhanced&lt;/term&gt;
+    &lt;/localDescription&gt;
+    &lt;biogHist&gt;
+        &lt;abstract&gt;
+The Central Asiatic Expeditions took place between 1921 and 1930, and were led by Roy Chapman Andrews. Walter Granger was chief paleontologist and the second in command. With a team of up to forty scientists, drivers, and assistants, they were able to collect a vast multitude of objects for the American Museum of Natural History and make many groundbreaking discoveries such as the first dinosaur eggs. They explored throughout the Gobi Desert and cemented this area as a prime location for paleontological study.
+        &lt;/abstract&gt;
+        &lt;p&gt;
+“These expeditions went into Mongolia to explore the Gobi Desert, seek the ancestry of man, and study the natural history of the region. With the aid of a fleet of motor cars, a supporting caravan of camels and a well-organized scientific staff, the expeditions of 1922, 1923, 1925, 1928 and 1930 covered practically all of the fields of desert exploration” (1). .... The expeditions gathered astaggering body of observations, records, measurements, photographs, films, and collections as materials for the American Museum of Natural History and scientific papers in publication. They made many historic discoveries, including the first dinosaur eggs. The Expeditions were memorable as well for the use of automobiles in their work, and Andrews’ inexhaustive promotion and fundraising efforts, which included yearly speaking tours, sponsorships and even auctioning one of the dinosaur eggs.
+        &lt;/p&gt;
+        &lt;chronList&gt;
+            &lt;chronItem&gt;
+                &lt;dateRange&gt;
+                    &lt;fromDate standardDate="1921"&gt;1921&lt;/fromDate&gt;
+                    &lt;toDate standardDate="1930"&gt;1930&lt;/toDate&gt;
+                &lt;/dateRange&gt;
+                &lt;event&gt;Central Asiatic Expeditions&lt;/event&gt;
+            &lt;/chronItem&gt;
+            &lt;chronItem&gt;
+                &lt;date standardDate="1922"&gt;1922&lt;/date&gt;
+                &lt;event&gt;season one&lt;/event&gt;
+            &lt;/chronItem&gt;
+                &lt;chronItem&gt;
+                &lt;date standardDate="1923"&gt;1923&lt;/date&gt;
+                &lt;event&gt;season two&lt;/event&gt;
+            &lt;/chronItem&gt;
+            ...
+        &lt;/chronList&gt;
+    &lt;/bioghist&gt;
+&lt;/descriptions&gt;
+    </code>
+  </pre>
+                    </blockquote>
+                </div>
+            </div>
+            <!-- code example relations -->
+            <div class="container">
+                <h4 padding="20px" id="exampleRelations">relations</h4>
+                <div>
+                    <blockquote>
+                        <pre>
+    <code>
+&lt;relations&gt;
+    ...
+    &lt;cpfRelation xlink:type="simple" xlink:href="amnhp_1000862"&gt;
+        &lt;relationEntry&gt;Grimaldi, David A.&lt;/relationEntry&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;Curator of exhibition; chairman and associate curator, American Museum of Natural History Department of Entomology&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/cpfRelation&gt;
+    &lt;cpfRelation xlink:type="simple" xlink:href="amnhp_1001337"&gt;
+        &lt;relationEntry&gt;Malozemoff, Plato&lt;/relationEntry&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;Sponsor of the exhibition&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/cpfRelation&gt;
+    &lt;cpfRelation xlink:type="simple" xlink:href="http://id.loc.gov/authorities/names/n83204381"&gt;
+        &lt;relationEntry&gt;Museo degli argenti (Florence, Italy)&lt;/relationEntry&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;Contributed objects to the exhibition&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/cpfRelation&gt;
+    ...
+    &lt;resourceRelation xlink:href="http://libcat1.amnh.org/record=b1208876" resourceRelationType="subjectOf"&gt;
+        &lt;relationEntry&gt;Amber: Window to the Past photographic slides of exhibition construction&lt;/relationEntry&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;Date of resource: 1996; Color transparencies (35mm) of exhibition construction; Repository: AMNH Special Collections, PSC 527&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/resourceRelation&gt;
+    &lt;resourceRelation xlink:href="http://libcat1.amnh.org/record=b1206904" resourceRelationType="subjectOf"&gt;
+        &lt;relationEntry&gt;Amber: Window to the Past photographic slides of exhibition.&lt;/relationEntry&gt;
+        &lt;descriptiveNote&gt;
+            &lt;p&gt;Date of resource: 1996-1997; Color transparencies (35mm) of exhibition in gallery; Repository: AMNH Special Collections, PSC 50-51&lt;/p&gt;
+        &lt;/descriptiveNote&gt;
+    &lt;/resourceRelation&gt;
+        ...
+&lt;/relations&gt;
+    </code>
+  </pre>
+                    </blockquote>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
